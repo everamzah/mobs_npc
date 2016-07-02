@@ -56,7 +56,7 @@ mobs:register_mob("mobs_npc:trader", {
 	water_damage = 0,
 	lava_damage = 4,
 	light_damage = 0,
-	follow = {"shop:coin", "default:gold_ingot", "default:goldblock"},
+	--follow = {"shop:coin", "default:gold_ingot", "default:goldblock"},
 	view_range = 7,
 	owner = "",
 	order = "stand",
