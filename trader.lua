@@ -4,21 +4,21 @@ local S = mobs.intllib
 mobs.human = {
 	items = {
 		--{item for sale, price, chance of appearing in trader's inventory}
-		{"default:apple 10", "default:gold_ingot 2", 10},
-		{"farming:bread 10", "default:gold_ingot 4", 5},
-		{"default:clay 10", "default:gold_ingot 2", 12},
-		{"default:brick 10", "default:gold_ingot 4", 17},
-		{"default:glass 10", "default:gold_ingot 4", 17},
-		{"default:obsidian 10", "default:gold_ingot 15", 50},
-		{"default:diamond 1", "default:gold_ingot 5", 40},
-		{"farming:wheat 10", "default:gold_ingot 2", 17},
-		{"default:tree 5", "default:gold_ingot 4", 20},
-		{"default:stone 10", "default:gold_ingot 8", 17},
-		{"default:desert_stone 10", "default:gold_ingot 8", 27},
-		{"default:sapling 1", "default:gold_ingot 1", 7},
-		{"default:pick_steel 1", "default:gold_ingot 2", 7},
-		{"default:sword_steel 1", "default:gold_ingot 2", 17},
-		{"default:shovel_steel 1", "default:gold_ingot 1", 17},
+		{"default:apple 10", "shop:coin 2", 10},
+		{"farming:bread 10", "shop:coin 4", 5},
+		{"default:clay 10", "shop:coin 2", 12},
+		{"default:brick 10", "shop:coin 4", 17},
+		{"default:glass 10", "shop:coin 4", 17},
+		{"default:obsidian 10", "shop:coin 15", 50},
+		{"default:diamond 1", "shop:coin 5", 40},
+		{"farming:wheat 10", "shop:coin 2", 17},
+		{"default:tree 5", "shop:coin 4", 20},
+		{"default:stone 10", "shop:coin 8", 17},
+		{"default:desert_stone 10", "shop:coin 8", 27},
+		{"default:sapling 1", "shop:coin 1", 7},
+		{"default:pick_steel 1", "shop:coin 2", 7},
+		{"default:sword_steel 1", "shop:coin 2", 17},
+		{"default:shovel_steel 1", "shop:coin 1", 17},
 	},
 	names = {
 		"Bob", "Duncan", "Bill", "Tom", "James", "Ian", "Lenny"
@@ -32,11 +32,11 @@ mobs:register_mob("mobs_npc:trader", {
 	passive = false,
 	damage = 3,
 	attack_type = "dogfight",
-	attacks_monsters = true,
+	attacks_monsters = false,
 	pathfinding = false,
-	hp_min = 10,
-	hp_max = 20,
-	armor = 100,
+	hp_min = 25,
+	hp_max = 50,
+	armor = 200,
 	collisionbox = {-0.35,-1.0,-0.35, 0.35,0.8,0.35},
 	visual = "mesh",
 	mesh = "character.b3d",
@@ -46,14 +46,18 @@ mobs:register_mob("mobs_npc:trader", {
 	makes_footstep_sound = true,
 	sounds = {},
 	walk_velocity = 2,
-	run_velocity = 3,
+	run_velocity = 2,
 	jump = false,
-	drops = {},
+	drops = {
+		{name = "default:goldblock", chance = 100, min = 1, max = 1},
+		{name = "default:gold_ingot", chance = 25, min = 1, max = 1},
+		{name = "shop:coin", chance = 1, min = 1, max = 2},
+	},
 	water_damage = 0,
 	lava_damage = 4,
 	light_damage = 0,
-	follow = {"default:diamond"},
-	view_range = 15,
+	--follow = {"default:diamond"},
+	view_range = 7,
 	owner = "",
 	order = "stand",
 	fear_height = 3,
@@ -350,6 +354,3 @@ function mobs_trader(self, clicker, entity, race)
 end
 
 mobs:register_egg("mobs_npc:trader", S("Trader"), "default_sandstone.png", 1)
-
--- compatibility
-mobs:alias_mob("mobs:trader", "mobs_npc:trader")
