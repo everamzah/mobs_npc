@@ -43,7 +43,7 @@ mobs:register_mob("mobs_npc:npc", {
 	lava_damage = 2,
 	light_damage = 0,
 	follow = {"farming:bread", "mobs:meat", "default:diamond"},
-	view_range = 15,
+	view_range = 7,
 	owner = "",
 	order = "follow",
 	fear_height = 3,
