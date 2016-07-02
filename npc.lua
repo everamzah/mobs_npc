@@ -15,9 +15,9 @@ mobs:register_mob("mobs_npc:npc", {
 	attack_type = "dogfight",
 	attacks_monsters = true,
 	pathfinding = true,
-	hp_min = 10,
-	hp_max = 20,
-	armor = 100,
+	hp_min = 25,
+	hp_max = 100,
+	armor = 200,
 	collisionbox = {-0.35,-1.0,-0.35, 0.35,0.8,0.35},
 	visual = "mesh",
 	mesh = "character.b3d",
@@ -70,7 +70,7 @@ mobs:register_mob("mobs_npc:npc", {
 		local name = clicker:get_player_name()
 
 		-- right clicking with gold lump drops random item from mobs.npc_drops
-		if item:get_name() == "default:gold_lump" then
+		if item:get_name() == "shop:coin" then
 
 			if not minetest.setting_getbool("creative_mode") then
 				item:take_item()
