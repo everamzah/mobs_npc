@@ -10,7 +10,7 @@ mobs.human = {
 		{"default:brick 10", "shop:coin 4", 17},
 		{"default:glass 10", "shop:coin 4", 17},
 		{"default:obsidian 10", "shop:coin 15", 50},
-		{"default:diamond 1", "shop:coin 5", 40},
+		{"default:diamond 1", "default:goldblock", 40},
 		{"farming:wheat 10", "shop:coin 2", 17},
 		{"default:tree 5", "shop:coin 4", 20},
 		{"default:stone 10", "shop:coin 8", 17},
@@ -30,7 +30,7 @@ mobs.human = {
 mobs:register_mob("mobs_npc:trader", {
 	type = "npc",
 	passive = false,
-	damage = 3,
+	damage = 5,
 	attack_type = "dogfight",
 	attacks_monsters = false,
 	pathfinding = false,

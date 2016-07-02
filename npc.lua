@@ -11,7 +11,7 @@ mobs.npc_drops = {
 mobs:register_mob("mobs_npc:npc", {
 	type = "npc",
 	passive = false,
-	damage = 3,
+	damage = 5,
 	attack_type = "dogfight",
 	attacks_monsters = true,
 	pathfinding = true,
