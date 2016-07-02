@@ -10,7 +10,7 @@ mobs.human = {
 		{"default:brick 10", "shop:coin 4", 17},
 		{"default:glass 10", "shop:coin 4", 17},
 		{"default:obsidian 10", "shop:coin 15", 50},
-		{"default:diamond 1", "default:goldblock", 40},
+		{"default:diamond 1", "default:goldblock", 7}, -- 40
 		{"farming:wheat 10", "shop:coin 2", 17},
 		{"default:tree 5", "shop:coin 4", 20},
 		{"default:stone 10", "shop:coin 8", 17},
