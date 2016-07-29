@@ -1,3 +1,26 @@
+-------------------------------------------------------------------------------
+-- Mob Framework Mod by Sapier
+--
+-- You may copy, use, modify or do nearly anything except removing this
+-- copyright notice.
+-- And of course you are NOT allow to pretend you have written it.
+--
+--! @file inventory.lua
+--! @brief component containing mob inventory related functions
+--! @copyright Sapier
+--! @author Sapier
+--! @date 2013-01-02
+--
+--! @defgroup Inventory Inventory subcomponent
+--! @brief Component handling mob inventory
+--! @ingroup framework_int
+--! @{
+--
+-- Contact sapier a t gmx net
+-------------------------------------------------------------------------------
+
+-- Modifications Copyright 2016 by James Stevenson
+
 if not minetest.get_modpath("shop") then
 	minetest.register_alias("shop:coin", "default:gold_ingot")
 end
@@ -30,82 +53,6 @@ local mantab = {
 	}
 }
 
--- Trader
-mobs:register_mob("mobs_npc:trader", {
-	type = "npc",
-	passive = false,
-	damage = 5,
-	attack_type = "dogfight",
-	attacks_monsters = false,
-	pathfinding = false,
-	hp_min = 25,
-	hp_max = 50,
-	armor = 100,
-	collisionbox = {-0.2, -1.0, -0.2, 0.2, 0.8, 0.2},
-	visual = "mesh",
-	mesh = "character.b3d",
-	textures = {
-		{"mobs_trader.png"}, -- by Frerin
-	},
-	makes_footstep_sound = true,
-	sounds = {},
-	walk_velocity = 2,
-	run_velocity = 2,
-	jump = false,
-	drops = {
-		{name = "default:goldblock", chance = 100, min = 1, max = 1},
-		{name = "default:gold_ingot", chance = 25, min = 1, max = 1},
-		{name = "shop:coin", chance = 1, min = 1, max = 2},
-	},
-	water_damage = 0,
-	lava_damage = 4,
-	light_damage = 0,
-	--follow = {"shop:coin", "default:gold_ingot", "default:goldblock"},
-	view_range = 5,
-	owner = "",
-	order = "stand",
-	fear_height = 3,
-	animation = {
-		speed_normal = 30,
-		speed_run = 30,
-		stand_start = 0,
-		stand_end = 79,
-		walk_start = 168,
-		walk_end = 187,
-		run_start = 168,
-		run_end = 187,
-		punch_start = 200,
-		punch_end = 219,
-	},
-	on_rightclick = function(self, clicker)
-		mobs_trader(self, clicker, mantab)
-	end,
-})
-
-
--------------------------------------------------------------------------------
--- Mob Framework Mod by Sapier
---
--- You may copy, use, modify or do nearly anything except removing this
--- copyright notice.
--- And of course you are NOT allow to pretend you have written it.
---
---! @file inventory.lua
---! @brief component containing mob inventory related functions
---! @copyright Sapier
---! @author Sapier
---! @date 2013-01-02
---
---! @defgroup Inventory Inventory subcomponent
---! @brief Component handling mob inventory
---! @ingroup framework_int
---! @{
---
--- Contact sapier a t gmx net
--------------------------------------------------------------------------------
-
--- Modifications Copyright 2016 by James Stevenson
-
 local trader_inventory = {}
 
 local function add_goods(race)
@@ -118,7 +65,7 @@ local function add_goods(race)
 	end
 end
 
-function mobs_trader(self, clicker, race)
+local function mobs_trader(self, clicker, race)
 	local player = clicker:get_player_name()
 
 	if not self.id then
@@ -191,10 +138,12 @@ function mobs_trader(self, clicker, race)
 				inv.set_stack(inv, "price", 1, nil)
 			end
 		end,
+		--[[
 		on_put = function(inv, listname, index, stack, player)
 		end,
 		on_take = function(inv, listname, index, stack, player)
 		end,
+		--]]
 	}
 
 	if is_inventory == nil then
@@ -203,7 +152,6 @@ function mobs_trader(self, clicker, race)
 		trader_inventory.set_size(trader_inventory, "selection", 1)
 		trader_inventory.set_size(trader_inventory, "price", 1)
 		add_goods(race)
-		--print("added stuff")
 	end
 
 	minetest.chat_send_player(player, S("[NPC] <Trader @1> Hello, @2, have a look at my wares.",
@@ -224,12 +172,62 @@ function mobs_trader(self, clicker, race)
 			default.get_hotbar_bg(0, 5))
 end
 
+-- Trader
+mobs:register_mob("mobs_npc:trader", {
+	type = "npc",
+	passive = false,
+	damage = 5,
+	attack_type = "dogfight",
+	attacks_monsters = false,
+	pathfinding = false,
+	hp_min = 25,
+	hp_max = 50,
+	armor = 100,
+	collisionbox = {-0.2, -1.0, -0.2, 0.2, 0.8, 0.2},
+	visual = "mesh",
+	mesh = "character.b3d",
+	textures = {
+		{"mobs_trader.png"}, -- by Frerin
+	},
+	makes_footstep_sound = true,
+	sounds = {},
+	walk_velocity = 2,
+	run_velocity = 2,
+	jump = false,
+	drops = {
+		{name = "default:goldblock", chance = 100, min = 1, max = 1},
+		{name = "default:gold_ingot", chance = 25, min = 1, max = 1},
+		{name = "shop:coin", chance = 1, min = 1, max = 2},
+	},
+	water_damage = 0,
+	lava_damage = 4,
+	light_damage = 0,
+	--follow = {"shop:coin", "default:gold_ingot", "default:goldblock"},
+	view_range = 5,
+	owner = "",
+	order = "stand",
+	fear_height = 3,
+	animation = {
+		speed_normal = 30,
+		speed_run = 30,
+		stand_start = 0,
+		stand_end = 79,
+		walk_start = 168,
+		walk_end = 187,
+		run_start = 168,
+		run_end = 187,
+		punch_start = 200,
+		punch_end = 219,
+	},
+	on_rightclick = function(self, clicker)
+		mobs_trader(self, clicker, mantab)
+	end,
+})
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "mobs_npc:trader" then
 		return
 	end
-
-	--print(dump(trader_inventory:get_lists()))
 
 	local selection_name = trader_inventory:get_stack("selection", 1):get_name()
 	local selection_count = trader_inventory:get_stack("selection", 1):get_count()
@@ -239,10 +237,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local price_count = trader_inventory:get_stack("price", 1):get_count()
 	local price_string = price_name .. " " .. tostring(price_count)
 
-	--print(selection_string .. "\nfor:\n" .. price_string)
-
 	if player:get_inventory():contains_item("main", price_string) then
-		--print("you got it!")
 		trader_inventory:set_stack("selection", 1, nil)
 		trader_inventory:set_stack("price", 1, nil)
 
@@ -255,12 +250,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		minetest.chat_send_player(player:get_player_name(),
 				"Not enough credits!")
 	end
-
-	--[[
-	for k, v in ipairs(mantab.items) do
-		print(v[1])
-	end
-	--]]
 end)
 
 mobs:register_egg("mobs_npc:trader", S("Trader"), "default_sandstone.png", 1)
